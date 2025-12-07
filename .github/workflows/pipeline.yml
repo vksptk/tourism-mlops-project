@@ -1,0 +1,40 @@
+name: Tourism MLOps Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-train-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      PROJECT_NAME: tourism_mlops_project
+      HF_DATASET_REPO: vksptk/tourism-dataset
+      HF_MODEL_REPO: vksptk/tourism-wellness-package-model
+      HUGGINGFACEHUB_API_TOKEN: ${{ secrets.HF_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install datasets huggingface_hub scikit-learn pandas numpy joblib
+
+      - name: Run data preparation
+        run: |
+          python tourism_mlops_project/src/data_prep.py
+
+      - name: Train and register model
+        run: |
+          python tourism_mlops_project/src/train_model.py
