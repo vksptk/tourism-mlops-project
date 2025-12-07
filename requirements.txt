@@ -1,6 +1,0 @@
-streamlit
-pandas
-numpy
-scikit-learn
-huggingface_hub
-joblib
