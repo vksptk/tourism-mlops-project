@@ -52,8 +52,9 @@ def main():
     test_df[TARGET_COL] = y_test
 
     # Local save paths
-    data_dir = os.path.join(project_name, "data")
+    data_dir = "data"
     os.makedirs(data_dir, exist_ok=True)
+    
 
     train_path = os.path.join(data_dir, "train.csv")
     test_path = os.path.join(data_dir, "test.csv")
