@@ -33,8 +33,8 @@ jobs:
 
       - name: Run data preparation
         run: |
-          python tourism_mlops_project/src/data_prep.py
+          python src/data_prep.py
 
       - name: Train and register model
         run: |
-          python tourism_mlops_project/src/train_model.py
+          python src/train_model.py
